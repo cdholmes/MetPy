@@ -745,6 +745,103 @@ class SkewT:
 
 
 @exporter.export
+class Stuve(SkewT):
+    r"""Make Stüve plots of data.
+
+    Stüve plots are are a thermodynamic diagram with temperature on the x-axis and
+    pressure scaled by p^(R/cp)=p^0.286 on the y-axis. This class is derived from the SkewT class and
+    has the same capabilities for plotting data, wind barbs, dry and saturated 
+    adiabats, and mixing ratio lines.
+
+    Attributes
+    ----------
+    ax : `matplotlib.axes.Axes`
+        The underlying Axes instance, which can be used for calling additional
+        plot functions (e.g. `axvline`)
+
+    """
+    def __init__(self, *args, rotation=0, aspect='auto', **kwargs):
+        r"""Create Stüve plots.
+
+        Parameters
+        ----------
+        fig : matplotlib.figure.Figure, optional
+            Source figure to use for plotting. If none is given, a new
+            :class:`matplotlib.figure.Figure` instance will be created.
+        rotation : float or int, optional
+            This value is ignored for Stüve plots (included only for compatibility with SkewT) 
+        subplot : tuple[int, int, int] or `matplotlib.gridspec.SubplotSpec` instance, optional
+            Controls the size/position of the created subplot. This allows creating
+            the skewT as part of a collection of subplots. If subplot is a tuple, it
+            should conform to the specification used for
+            :meth:`matplotlib.figure.Figure.add_subplot`. The
+            :class:`matplotlib.gridspec.SubplotSpec`
+            can be created by using :class:`matplotlib.gridspec.GridSpec`.
+        rect : tuple[float, float, float, float], optional
+            Rectangle (left, bottom, width, height) in which to place the axes. This
+            allows the user to place the axes at an arbitrary point on the figure.
+        aspect : float, int, or Literal['auto'], optional
+            Aspect ratio (i.e. ratio of y-scale to x-scale) to maintain in the plot.
+            Defaults to ``'auto'`` which tells matplotlib to handle
+            the aspect ratio automatically.
+
+        """
+        super().__init__(*args, **kwargs, rotation=0, aspect=aspect)
+
+        # Forward and inverse functions for Stuve pressure coordinate scaling
+        f = lambda p: p**0.286
+        g = lambda p: p**(1/0.286)
+
+        # Set the yaxis as Stuve
+        self.ax.set_yscale('function',functions=(f, g))
+
+
+@exporter.export
+class Emagram(SkewT):
+    r"""Make Emagram plots of data.
+
+    Emagram plots are T log-P thermodynamic diagrams. They differ from SkewT
+    in that the T axis is not skewed. This class is derived from the SkewT class and
+    has the same capabilities for plotting data, wind barbs, dry and saturated 
+    adiabats, and mixing ratio lines.
+
+    Attributes
+    ----------
+    ax : `matplotlib.axes.Axes`
+        The underlying Axes instance, which can be used for calling additional
+        plot functions (e.g. `axvline`)
+
+    """
+    def __init__(self, *args, rotation=0, **kwargs):
+        r"""Create Emagram plots.
+
+        Parameters
+        ----------
+        fig : matplotlib.figure.Figure, optional
+            Source figure to use for plotting. If none is given, a new
+            :class:`matplotlib.figure.Figure` instance will be created.
+        rotation : float or int, optional
+            This value is ignored for Emagram plots (included only for compatibility with SkewT) 
+        subplot : tuple[int, int, int] or `matplotlib.gridspec.SubplotSpec` instance, optional
+            Controls the size/position of the created subplot. This allows creating
+            the skewT as part of a collection of subplots. If subplot is a tuple, it
+            should conform to the specification used for
+            :meth:`matplotlib.figure.Figure.add_subplot`. The
+            :class:`matplotlib.gridspec.SubplotSpec`
+            can be created by using :class:`matplotlib.gridspec.GridSpec`.
+        rect : tuple[float, float, float, float], optional
+            Rectangle (left, bottom, width, height) in which to place the axes. This
+            allows the user to place the axes at an arbitrary point on the figure.
+        aspect : float, int, or Literal['auto'], optional
+            Aspect ratio (i.e. ratio of y-scale to x-scale) to maintain in the plot.
+            Defaults to ``'auto'`` tells matplotlib to handle
+            the aspect ratio automatically.
+
+        """
+        super().__init__(*args, **kwargs, rotation=0)
+
+
+@exporter.export
 class Hodograph:
     r"""Make a hodograph of wind data.
 
