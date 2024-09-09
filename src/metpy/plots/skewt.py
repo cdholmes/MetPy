@@ -749,9 +749,9 @@ class Stuve(SkewT):
     r"""Make Stüve plots of data.
 
     Stüve plots are are a thermodynamic diagram with temperature on the x-axis and
-    pressure scaled by p^(R/cp)=p^0.286 on the y-axis. This class is derived from the SkewT class and
-    has the same capabilities for plotting data, wind barbs, dry and saturated 
-    adiabats, and mixing ratio lines.
+    pressure scaled by p^(R/cp)=p^0.286 on the y-axis. This class is derived from the
+    SkewT class and has the same capabilities for plotting data, wind barbs,
+    dry and saturated adiabats, and mixing ratio lines.
 
     Attributes
     ----------
@@ -760,6 +760,7 @@ class Stuve(SkewT):
         plot functions (e.g. `axvline`)
 
     """
+
     def __init__(self, *args, rotation=0, aspect='auto', **kwargs):
         r"""Create Stüve plots.
 
@@ -789,8 +790,8 @@ class Stuve(SkewT):
         super().__init__(*args, **kwargs, rotation=0, aspect=aspect)
 
         # Forward and inverse functions for Stuve pressure coordinate scaling
-        f = lambda p: p**0.286
-        g = lambda p: p**(1/0.286)
+        def f(p): return p**0.286
+        def g(p): return p**( 1 / 0.286 )
 
         # Set the yaxis as Stuve
         self.ax.set_yscale('function',functions=(f, g))
@@ -802,7 +803,7 @@ class Emagram(SkewT):
 
     Emagram plots are T log-P thermodynamic diagrams. They differ from SkewT
     in that the T axis is not skewed. This class is derived from the SkewT class and
-    has the same capabilities for plotting data, wind barbs, dry and saturated 
+    has the same capabilities for plotting data, wind barbs, dry and saturated
     adiabats, and mixing ratio lines.
 
     Attributes
@@ -812,6 +813,7 @@ class Emagram(SkewT):
         plot functions (e.g. `axvline`)
 
     """
+
     def __init__(self, *args, rotation=0, **kwargs):
         r"""Create Emagram plots.
 
@@ -821,7 +823,7 @@ class Emagram(SkewT):
             Source figure to use for plotting. If none is given, a new
             :class:`matplotlib.figure.Figure` instance will be created.
         rotation : float or int, optional
-            This value is ignored for Emagram plots (included only for compatibility with SkewT) 
+            This value is ignored for Emagrams, but included for compatibility with SkewT
         subplot : tuple[int, int, int] or `matplotlib.gridspec.SubplotSpec` instance, optional
             Controls the size/position of the created subplot. This allows creating
             the skewT as part of a collection of subplots. If subplot is a tuple, it
