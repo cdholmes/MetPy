@@ -770,7 +770,7 @@ class Stuve(SkewT):
             Source figure to use for plotting. If none is given, a new
             :class:`matplotlib.figure.Figure` instance will be created.
         rotation : float or int, optional
-            This value is ignored for Stüve plots (included only for compatibility with SkewT) 
+            This value is ignored for Stuve plots, but included for compatibility with SkewT
         subplot : tuple[int, int, int] or `matplotlib.gridspec.SubplotSpec` instance, optional
             Controls the size/position of the created subplot. This allows creating
             the skewT as part of a collection of subplots. If subplot is a tuple, it
@@ -790,11 +790,13 @@ class Stuve(SkewT):
         super().__init__(*args, **kwargs, rotation=0, aspect=aspect)
 
         # Forward and inverse functions for Stuve pressure coordinate scaling
-        def f(p): return p**0.286
-        def g(p): return p**( 1 / 0.286 )
+        def f(p): 
+            return p**0.286
+        def g(p): 
+            return p**(1 / 0.286)
 
         # Set the yaxis as Stuve
-        self.ax.set_yscale('function',functions=(f, g))
+        self.ax.set_yscale('function', functions=(f, g))
 
 
 @exporter.export
