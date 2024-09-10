@@ -1,10 +1,10 @@
 # Copyright (c) 2014,2015,2016,2017,2019 MetPy Developers.
 # Distributed under the terms of the BSD 3-Clause License.
 # SPDX-License-Identifier: BSD-3-Clause
-"""Make Skew-T Log-P based plots.
+"""Make thermodynamic diagrams.
 
-Contain tools for making Skew-T Log-P plots, including the base plotting class,
-`SkewT`, as well as a class for making a `Hodograph`.
+Contain tools for making thermodynamic diagrams, including the base plotting class,
+`SkewT`, derived `Stuve` and `Emagram` classes, and a class for making a `Hodograph`.
 """
 
 from contextlib import ExitStack
@@ -789,10 +789,11 @@ class Stuve(SkewT):
         """
         super().__init__(*args, **kwargs, rotation=0, aspect=aspect)
 
-        # Forward and inverse functions for Stuve pressure coordinate scaling
-        def f(p): 
+        # Forward (f) and inverse (g) functions for Stuve pressure coordinate scaling
+        def f(p):
             return p**0.286
-        def g(p): 
+
+        def g(p):
             return p**(1 / 0.286)
 
         # Set the yaxis as Stuve
