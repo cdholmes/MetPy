@@ -2,15 +2,13 @@
 # Distributed under the terms of the BSD 3-Clause License.
 # SPDX-License-Identifier: BSD-3-Clause
 """Tests for the `Stuve` class."""
-import warnings
-
 import matplotlib
 from matplotlib.gridspec import GridSpec
 import matplotlib.pyplot as plt
 import numpy as np
 import pytest
 
-from metpy.plots import Hodograph, Stuve
+from metpy.plots import Stuve
 from metpy.testing import autoclose_figure, version_check
 from metpy.units import units
 
@@ -367,4 +365,3 @@ def test_stuve_barb_unit_conversion_exception(u, v):
         stuve = Stuve(fig, aspect='auto')
         with pytest.raises(ValueError):
             stuve.plot_barbs(p_wind, u, v, plot_units='knots')
-

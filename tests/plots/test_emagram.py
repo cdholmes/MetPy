@@ -2,15 +2,13 @@
 # Distributed under the terms of the BSD 3-Clause License.
 # SPDX-License-Identifier: BSD-3-Clause
 """Tests for the `Emagram` class."""
-import warnings
-
 import matplotlib
 from matplotlib.gridspec import GridSpec
 import matplotlib.pyplot as plt
 import numpy as np
 import pytest
 
-from metpy.plots import Hodograph, Emagram
+from metpy.plots import Emagram
 from metpy.testing import autoclose_figure, version_check
 from metpy.units import units
 
@@ -367,4 +365,3 @@ def test_emagram_barb_unit_conversion_exception(u, v):
         emagram = Emagram(fig, aspect='auto')
         with pytest.raises(ValueError):
             emagram.plot_barbs(p_wind, u, v, plot_units='knots')
-
