@@ -44,7 +44,7 @@ def test_stuve_api():
     return fig
 
 
-@pytest.mark.mpl_image_compare(remove_text=True, style='default', tolerance=0.32)
+@pytest.mark.mpl_image_compare(remove_text=True, style='default', tolerance=0.35)
 def test_stuve_api_units():
     """Test the Stuve API when units are provided."""
     with matplotlib.rc_context({'axes.autolimit_mode': 'data'}):

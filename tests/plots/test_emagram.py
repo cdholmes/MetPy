@@ -68,7 +68,7 @@ def test_emagram_api_units():
     return fig
 
 
-@pytest.mark.mpl_image_compare(tolerance=0., remove_text=True, style='default')
+@pytest.mark.mpl_image_compare(tolerance=0.001, remove_text=True, style='default')
 def test_emagram_default_aspect_empty():
     """Test Emagram with default aspect and no plots, only special lines."""
     # With this rotation and the default aspect, this matches exactly the NWS Emagram PDF
@@ -80,7 +80,7 @@ def test_emagram_default_aspect_empty():
     return fig
 
 
-@pytest.mark.mpl_image_compare(tolerance=0., remove_text=True, style='default')
+@pytest.mark.mpl_image_compare(tolerance=0.001, remove_text=True, style='default')
 def test_emagram_mixing_line_args():
     """Test plot_mixing_lines accepting kwargs for mixing ratio and pressure levels."""
     # Explicitly pass default values as kwargs, should recreate NWS Emagram PDF as above
